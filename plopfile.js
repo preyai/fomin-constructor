@@ -14,6 +14,10 @@ export default function (plop) {
       type: 'add',
       path: 'src/components/{{pascalCase name}}/{{pascalCase name}}Styles.module.scss',
       templateFile: 'plop/templates/styles/ComponentStyles.module.scss',
+    }, {
+      type: 'add',
+      path: 'src/components/{{pascalCase name}}/{{pascalCase name}}.stories.tsx',
+      templateFile: 'plop/templates/stories/Component.stories.tsx.hbs',
     }],
   })
 }
