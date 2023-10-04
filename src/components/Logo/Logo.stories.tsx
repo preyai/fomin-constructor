@@ -1,14 +1,14 @@
 import { Meta, StoryObj } from '@storybook/react';
-import Samo from './Samo';
+import Logo from './Logo';
 
 const meta = {
-  title: 'Samo',
-  component: Samo,
+  title: 'Logo',
+  component: Logo,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof Samo>;
+} satisfies Meta<typeof Logo>;
 
 export default meta;
 

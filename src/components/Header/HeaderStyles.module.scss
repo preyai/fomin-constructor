@@ -1,0 +1,21 @@
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 0;
+}
+
+.info {
+
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+.phone {
+    font-family: Circe;
+    font-size: 20px;
+    line-height: 1.2;
+    font-weight: 700;
+    color: #4a4a4a;
+}

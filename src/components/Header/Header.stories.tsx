@@ -1,14 +1,14 @@
 import { Meta, StoryObj } from '@storybook/react';
-import Dull from './Dull';
+import Header from './Header';
 
 const meta = {
-  title: 'Dull',
-  component: Dull,
+  title: 'Header',
+  component: Header,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof Dull>;
+} satisfies Meta<typeof Header>;
 
 export default meta;
 

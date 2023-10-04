@@ -18,6 +18,10 @@ export default function (plop) {
       type: 'add',
       path: 'src/components/{{pascalCase name}}/{{pascalCase name}}.stories.tsx',
       templateFile: 'plop/templates/stories/Component.stories.tsx.hbs',
+    }, {
+      type: 'add',
+      path: 'src/components/{{pascalCase name}}/index.ts',
+      templateFile: 'plop/templates/index.ts.hbs',
     }],
   })
 }
