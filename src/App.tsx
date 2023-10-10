@@ -1,12 +1,14 @@
+import { Provider } from "react-redux"
 import Main from "./components/Main"
+import store from "./store"
 
 
 function App() {
 
   return (
-    <>
-      <Main />
-    </>
+    <Provider store={store}>
+        <Main />  
+    </Provider>
   )
 }
 

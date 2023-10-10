@@ -1,9 +1,6 @@
 .container {
     background-image: url(../../assets/background.jpg);
     background-size: cover;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
 
     h1 {
         font-family: Circe;
@@ -12,15 +9,14 @@
         font-weight: 300;
         color: #333333;
         max-width: 540px;
+
+        @media (max-width:500px) {
+            font-size: 32px;
+        }
     }
 }
 
-.wrapp {
-    max-width: 1200px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
+
 
 .body {
     margin: auto;

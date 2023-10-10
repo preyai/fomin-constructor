@@ -1,0 +1,26 @@
+.li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #eaeaea;
+    min-height: 64px;
+    border-radius: 30px;
+
+    font-family: Circe;
+    font-size: 17px;
+    line-height: 1.2;
+    font-weight: 400;
+    color: #333333;
+
+    cursor: pointer;
+
+    &:hover {
+        border-color: #c6007f;
+    }
+
+    &.active {
+        background-color: #c6007f;
+        border-color: #c6007f;
+        color: #ffffff;
+    }
+}

@@ -1,9 +1,12 @@
-
 .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 40px 0;
+
+    @media (max-width:500px) {
+        // flex-direction: column;
+    }
 }
 
 .info {
@@ -11,7 +14,12 @@
     display: flex;
     align-items: center;
     gap: 30px;
+
+    @media (max-width:500px) {
+        flex-direction: column;
+    }
 }
+
 .phone {
     font-family: Circe;
     font-size: 20px;
