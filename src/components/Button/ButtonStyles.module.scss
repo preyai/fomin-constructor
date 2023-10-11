@@ -10,11 +10,17 @@
     border-radius: 30px;
     padding: 0 40px;
     cursor: pointer;
-
+    transition: .3;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 15px;
+
+
+    &:hover {
+        background-color: #c6007f;
+        color: #ffffff;
+    }
 
     @media (max-width:500px) {
         font-size: 14px;
@@ -36,6 +42,4 @@
     min-height: 56px;
 }
 
-.medium {
-
-}
+.medium {}

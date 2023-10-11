@@ -1,14 +1,15 @@
 import { Meta, StoryObj } from '@storybook/react';
-import Step1 from './Step1';
+import RadioItem from './RadioItem';
+import { RadioType } from '../../types';
 
 const meta = {
-  title: 'Step1',
-  component: Step1,
+  title: 'RadioItem',
+  component: RadioItem,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof Step1>;
+} satisfies Meta<typeof RadioItem>;
 
 export default meta;
 
@@ -16,6 +17,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    
+    value: {} as RadioType
   },
 };

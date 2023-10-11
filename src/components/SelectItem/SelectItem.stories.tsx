@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import SelectItem from './SelectItem';
+import SelectItem, { SelectItemProps } from './SelectItem';
 
 const meta = {
   title: 'SelectItem',
@@ -16,6 +16,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    
-  },
+
+  } as SelectItemProps,
 };

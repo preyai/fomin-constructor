@@ -21,7 +21,7 @@ function Doctors() {
         <div className={styles.container}>
             <Swiper slidesPerView={3} style={{ overflowY: 'visible' }}>
                 {doctors.map(doctor => (
-                    <SwiperSlide>
+                    <SwiperSlide key={doctor.id}>
                         <DoctorCard doctor={doctor} />
                     </SwiperSlide>
                 ))}

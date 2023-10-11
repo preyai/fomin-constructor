@@ -7,10 +7,17 @@ export type VariantType = {
 }
 
 export type DoctorType = {
-    id:string
-    fio:string
-    photo:string
-    price:number
+    id: string
+    fio: string
+    photo: string
+    price: number
+}
+
+export type RadioType = {
+    id: string
+    label: string
+    description?: string
+    price: number
 }
 
 export type StepType = {

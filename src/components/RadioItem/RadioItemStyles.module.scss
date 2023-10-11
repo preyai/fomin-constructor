@@ -1,0 +1,105 @@
+.container {
+    box-sizing: border-box;
+    font-family: Circe;
+    font-weight: 400;
+    color: #333333;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    min-height: 100px;
+    border: 1px solid #eaeaea;
+    border-radius: 30px;
+    width: 100%;
+    padding: 20px 40px;
+    transition: .3s;
+
+
+    &.active {
+        border-color: #c6007f;
+        background-color: #c6007f;
+        color: #ffffff;
+
+        .marker {
+            background-color: #ffffff;
+            border-color: transparent;
+            box-shadow: #ffffff40 0 0 0 10px;
+        }
+
+        .boxLarge .description {
+            color: #ffa0dd;
+            opacity: 1;
+        }
+    }
+}
+
+.marker {
+    box-sizing: border-box;
+    display: block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid #4a4a4a;
+    border-radius: 50%;
+    transition: .3s;
+}
+
+.label {
+    font-family: Circe;
+    font-size: 24px;
+    line-height: 1.2;
+    font-weight: 300;
+}
+
+.info {
+    width: 23px;
+    height: 23px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #d0d0d0;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 700;
+    color: #b8b8b8;
+}
+
+.box {
+    flex-basis: 50%;
+    margin-left: auto;
+}
+
+.boxLarge {
+    flex-basis: 50%;
+    margin-left: auto;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: left;
+    align-items: center;
+    gap: 20px;
+
+    .description {
+        font-size: 24px;
+        font-weight: 400;
+        color: #333333;
+        opacity: .5;
+    }
+}
+
+.boxMedium {
+    flex-basis: unset
+}
+
+.description {
+    font-size: 17px;
+}
+
+.price {
+    font-size: 24px;
+}
+
+.smallBox {
+    margin: auto;
+    >div {
+        display: flex;
+        gap: 20px;
+    }
+}

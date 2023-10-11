@@ -8,6 +8,7 @@
     line-height: 1.2;
     font-weight: 300;
     color: #c6007f;
+
     @media (max-width:500px) {
         font-size: 32px;
     }
@@ -46,7 +47,7 @@
 
         cursor: pointer;
 
-        &:first-child{
+        &:first-child {
             grid-column-start: 0;
             grid-column-end: 3;
         }
@@ -70,3 +71,48 @@
         grid-template-columns: 1fr;
     }
 }
+
+.appear {}
+
+.appearActive {}
+
+.appearDone {}
+
+.enter {
+    opacity: 0;
+    transform: translateX(-100%);
+
+    &.revers {
+        transform: translateX(100%);
+    }
+}
+
+.enterActive {
+    opacity: 1;
+    transform: translateX(0%);
+    transition: 200ms;
+
+    &.revers {
+        transform: translateX(0%);
+    }
+
+}
+
+.enterDone {}
+
+.exit {
+    opacity: 1;
+    transform: translateX(0%);
+}
+
+.exitActive {
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 200ms, transform 200ms;
+
+    &.revers {
+        transform: translateX(-100%);
+    }
+}
+
+.exitDone {}

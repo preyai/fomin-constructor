@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import DoctorCard from './DoctorCard';
+import { DoctorType } from '../../types';
 
 const meta = {
   title: 'DoctorCard',
@@ -16,6 +17,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    
+    doctor: {} as DoctorType
   },
 };

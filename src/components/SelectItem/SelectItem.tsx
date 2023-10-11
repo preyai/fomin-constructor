@@ -1,7 +1,7 @@
 import { VariantType } from "../../types";
 import styles from "./SelectItemStyles.module.scss"
 
-type SelectItemProps = {
+export type SelectItemProps = {
     variant: VariantType,
     current: boolean,
     handler: () => void
