@@ -2,12 +2,17 @@ import { useAppDispatch, useAppSelector } from "../../store"
 import Button from "../Button"
 import styles from "./PaginationStyles.module.scss"
 import arrow from "../../assets/arrow1.png"
-import {  setValue } from "../../redux/stepsSlice"
+import { setValue } from "../../redux/stepsSlice"
+import { useMediaQuery } from "../../hooks/useMediaQuery"
 
 
 function Pagination() {
     const step = useAppSelector(state => state.steps.value)
     const dispatch = useAppDispatch()
+    const isPhone = useMediaQuery('(max-width: 768px)')
+
+    const start = step > 1 ? step - 2 : step - 1
+    const end = step > 1 ? step + 1 : step + 2
 
     const steps: number[] = Array.from({ length: 9 }, (_, i) => i + 1)
 
@@ -24,15 +29,30 @@ function Pagination() {
                 </Button>
             }
             <div className={styles.steps}>
-                {steps.map(s => (
-                    <div
-                        className={[styles.step, s === step && styles.active].join(" ")}
-                        key={s}
-                        onClick={() => dispatch(setValue(s))}
-                    >
-                        {s}
-                    </div>
-                ))}
+                {isPhone ?
+                    <>
+                        {steps.slice(start, end).map(s => (
+                            <div
+                                className={[styles.step, s === step && styles.active].join(" ")}
+                                key={s}
+                                onClick={() => dispatch(setValue(s))}
+                            >
+                                {s}
+                            </div>
+                        ))}
+                    </> :
+                    <>
+                        {steps.map(s => (
+                            <div
+                                className={[styles.step, s === step && styles.active].join(" ")}
+                                key={s}
+                                onClick={() => dispatch(setValue(s))}
+                            >
+                                {s}
+                            </div>
+                        ))}
+                    </>
+                }
             </div>
             {step < 9 &&
                 <Button

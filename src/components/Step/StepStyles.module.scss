@@ -80,10 +80,10 @@
 
 .enter {
     opacity: 0;
-    transform: translateX(-100%);
+    transform: translateX(100%);
 
     &.revers {
-        transform: translateX(100%);
+        transform: translateX(-100%);
     }
 }
 
@@ -107,11 +107,11 @@
 
 .exitActive {
     opacity: 0;
-    transform: translateX(100%);
-    transition: opacity 200ms, transform 200ms;
+    transform: translateX(-100%);
+    transition:  200ms;
 
     &.revers {
-        transform: translateX(-100%);
+        transform: translateX(100%);
     }
 }
 

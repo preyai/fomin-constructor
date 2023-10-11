@@ -30,6 +30,16 @@
             opacity: 1;
         }
     }
+
+    @media (max-width:768px) {
+        gap: 10px;
+        padding: 20px 10px;
+    }
+
+    @media (max-width:500px) {
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 .marker {
@@ -47,6 +57,9 @@
     font-size: 24px;
     line-height: 1.2;
     font-weight: 300;
+    @media (max-width:768px) {
+        font-size: 18px;
+    }
 }
 
 .info {
@@ -60,11 +73,18 @@
     font-size: 14px;
     font-weight: 700;
     color: #b8b8b8;
+    @media (max-width:768px) {
+        font-size: 12px;
+    }
 }
 
 .box {
     flex-basis: 50%;
     margin-left: auto;
+    @media (max-width:500px) {
+        margin: unset;
+        text-align: center;
+    }
 }
 
 .boxLarge {
@@ -98,8 +118,94 @@
 
 .smallBox {
     margin: auto;
+
     >div {
         display: flex;
         gap: 20px;
     }
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparentize($color: #000000, $amount: .88);
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    .body {
+        background-color: #ffffff;
+        width: 80%;
+        margin: auto;
+        max-height: 90%;
+        font-family: Circe;
+        line-height: 1.2;
+        font-weight: 400;
+        padding: 30px;
+        border-radius: 30px;
+
+        h3 {
+            font-size: 24px;
+            color: #000000;
+            margin: 0;
+        }
+
+        p {
+            margin-top: 0;
+            font-size: 18px;
+            line-height: 28px;
+            color: #4a4a4a;
+        }
+    }
+
+    .title {
+        font-family: Circe;
+        font-size: 30px;
+        line-height: 1.2;
+        font-weight: 400;
+        color: #c6007f;
+        border-bottom: solid 1px #d6d6d6;
+        padding-bottom: 30px;
+        margin-bottom: 30px;
+    }
+}
+
+.enter {
+    display: flex;
+    opacity: 0;
+    transform: scale(.9);
+}
+
+.enterActive {
+    display: flex;
+    opacity: 1;
+    transform: scale(1);
+    transition: 200ms;
+
+}
+
+.enterDone {
+    display: flex;
+}
+
+.exit {
+    display: flex;
+    opacity: 1;
+    transform: scale(1);
+
+}
+
+.exitActive {
+    display: flex;
+    opacity: 0;
+    transform: scale(.9);
+    transition: 200ms;
+
+}
+
+.exitDone {
+    display: none;
 }

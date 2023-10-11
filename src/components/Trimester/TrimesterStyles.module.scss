@@ -6,9 +6,11 @@
     gap: 30px;
     grid-template-columns: repeat(3, 1fr);
 
-    >:first-child {
-        grid-column-start: 1;
-        grid-column-end: 4;
+    @media (min-width:500px) {
+        >:first-child {
+            grid-column-start: 1;
+            grid-column-end: 4;
+        }
     }
 
     @media (max-width:500px) {
