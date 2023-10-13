@@ -1,36 +1,32 @@
-import { useState } from "react";
 import { RadioType } from "../../types";
 import RadioItem from "../RadioItem";
 import styles from "./ConsultationsStyles.module.scss"
+import { useAppDispatch, useAppSelector } from "../../store";
+import { setResult } from "../../redux/stepsSlice";
+import { useEffect, useState } from "react";
+import { get } from "../../libs/api";
 
-const variants: RadioType[] = [
-    {
-        id: '1',
-        label: 'Базовый   |   5 консультаций',
-        description: '5 000 за 1 консультацию',
-        price: 25000
-    },
-    {
-        id: '2',
-        label: 'Стандартный   |   8 консультаций',
-        description: '4 500 за 1 консультацию',
-        price: 36000
-    },
-    {
-        id: '3',
-        label: 'Расширенный   |   10 консультаций',
-        description: '4 000 за 1 консультацию',
-        price: 40000
-    },
-]
 
 function Consultations() {
-    const [curent, setCurent] = useState<RadioType>()
+    const [variants, setVariants] = useState<RadioType[]>([])
+    const { result, step } = useAppSelector(state => state.steps)
+    const dispatch = useAppDispatch()
+
+    const handler = (value: RadioType) => {
+        const _result = [ ...result ]
+        _result[step] = value
+        dispatch(setResult(_result))
+    }
+
+    useEffect(() => {
+        get('consultations')
+            .then(r => setVariants(r.map((i: any) => ({ ...i, ...{ label: `${i.label} | ${i.count} консультаций`, description: `${i.price / i.count} за 1 консультацию` } }))))
+    }, [])
 
     return (
         <div className={styles.container}>
             {variants.map(v => (
-                <RadioItem value={v} active={curent?.id === v.id} handler={(() => setCurent(v))} variant="large" />
+                <RadioItem value={v} active={result[step]?.id === v.id} handler={(() => handler(v))} variant="large" />
             ))}
         </div>
     )

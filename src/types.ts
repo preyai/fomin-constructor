@@ -3,7 +3,7 @@ export type InputType = 'SELECT' | 'CARD' | 'RADIO' | 'TABLE'
 
 export type VariantType = {
     label?: string
-    value: string
+    id: string
 }
 
 export type DoctorType = {

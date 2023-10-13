@@ -1,48 +1,33 @@
-import { useState } from "react";
 import { RadioType } from "../../types";
 import styles from "./NiptStyles.module.scss"
 import RadioItem from "../RadioItem";
+import { useAppDispatch, useAppSelector } from "../../store";
+import { setResult } from "../../redux/stepsSlice";
+import { useEffect, useState } from "react";
+import { get } from "../../libs/api";
 
-const variants: RadioType[] = [
-    {
-        id: '1',
-        label: 'Без НИПТ',
-        price: 0
-    },
-    {
-        id: '2',
-        label: 'Вариант НИПТ  4',
-        price: 13000
-    },
-    {
-        id: '3',
-        label: 'Базовый НИПТ',
-        price: 19000
-    },
-    {
-        id: '4',
-        label: 'Вариант НИПТ  5',
-        price: 24000
-    },
-    {
-        id: '5',
-        label: 'Полный НИПТ',
-        price: 54000
-    },
-    {
-        id: '6',
-        label: 'Вариант НИПТ  6',
-        price: 68000
-    },
-]
+
 
 function Nipt() {
-    const [curent, setCurent] = useState<RadioType>()
+    const [variants, setVariants] = useState<RadioType[]>([])
+    const {result, step} = useAppSelector(state => state.steps)
+    const dispatch = useAppDispatch()
+
+    const handler = (value: RadioType) => {
+        const _result = [ ...result ]
+        _result[step] = value
+        dispatch(setResult(_result))
+    }
+
+    useEffect(() => {
+        get('nipts')
+            .then(r => setVariants(r))
+    }, [])
 
     return (
         <div className={styles.container}>
             {variants.map(v => (
-                <RadioItem value={v} active={curent?.id === v.id} handler={(() => setCurent(v))} variant="medium" />
+                <RadioItem value={v} active={result[step]?.id === v.id} handler={(() => handler(v))} variant="medium" />
             ))}
         </div>
     )

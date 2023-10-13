@@ -1,36 +1,41 @@
 import styles from "./VisitsStyles.module.scss"
-import photo from "../../assets/doctor.png";
 import RadioItem from "../RadioItem";
-import { RadioType } from "../../types";
-import { useState } from "react";
+import { DoctorType, RadioType } from "../../types";
+import { useAppDispatch, useAppSelector } from "../../store";
+import { setResult } from "../../redux/stepsSlice";
+import { useEffect, useState } from "react";
+import { get } from "../../libs/api";
 
-const variants: RadioType[] = [
-    {
-        id: '1',
-        label: 'Стандартная программа',
-        description: '10 консультаций',
-        price: 35500
-    },
-    {
-        id: '2',
-        label: 'Неограниченное посещение',
-        description: 'Любое количество консультаций',
-        price: 75000
-    }
-]
+
 
 function Visits() {
-    const [curent, setCurent] = useState<RadioType>()
+    const [variants, setVariants] = useState<RadioType[]>([])
+
+    const { result, step } = useAppSelector(state => state.steps)
+    const dispatch = useAppDispatch()
+
+    const handler = (value: RadioType) => {
+        const _result = [ ...result ]
+        _result[step] = value
+        dispatch(setResult(_result))
+    }
+
+    useEffect(() => {
+        get('visits')
+            .then(r => setVariants(r))
+    }, [])
 
     return (
         <div className={styles.container}>
-            <div className={styles.doctor}>
-                <img src={photo} alt="doctor" />
-                <div className={styles.fio}>Иванов Иван Иванович</div>
-            </div>
+            {result[3] &&
+                <div className={styles.doctor}>
+                    <img src={(result[3] as DoctorType).photo || ""} alt="doctor" />
+                    <div className={styles.fio}>{(result[3] as DoctorType).fio}</div>
+                </div>
+            }
             <div className={styles.radioList}>
                 {variants.map(item => (
-                    <RadioItem value={item} handler={() => { setCurent(item) }} active={curent?.id === item.id} key={item.id} />
+                    <RadioItem value={item} handler={() => handler(item)} active={result[step]?.id === item.id} key={item.id} />
                 ))}
             </div>
         </div>

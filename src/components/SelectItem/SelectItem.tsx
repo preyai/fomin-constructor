@@ -16,7 +16,7 @@ function SelectItem({ variant, current, handler }: SelectItemProps) {
             onClick={handler}
             className={classNames}
         >
-            {variant.label || variant.value}
+            {variant.label || variant.id}
         </li>
     )
 }

@@ -15,7 +15,7 @@ type StepProps = {
 function Step({ step }: StepProps) {
     const nodeRef = useRef(null);
     const [prevStep, setPrevStep] = useState(0)
-    const stepIndex = useAppSelector(state => state.steps.value)
+    const stepIndex = useAppSelector(state => state.steps.step)
     const className = prevStep > stepIndex ? styles.revers : ""
 
     return (
@@ -23,15 +23,13 @@ function Step({ step }: StepProps) {
             <Header />
             <div className={styles.h1}>{step.label}</div>
             <p className={styles.p}>{step.description}</p>
-            <div>{prevStep}//{stepIndex} __ {className}</div>
             <SwitchTransition mode="out-in" >
                 <CSSTransition
                     key={stepIndex}
                     nodeRef={nodeRef}
                     timeout={200}
                     onEnter={() => {
-                        console.log(prevStep > stepIndex);
-
+                        
                         setPrevStep(stepIndex)
                     }}
                     mountOnEnter

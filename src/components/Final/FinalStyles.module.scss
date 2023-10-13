@@ -1,0 +1,18 @@
+.h1 {
+    font-family: Circe;
+    font-size: 48px;
+    line-height: 1.2;
+    font-weight: 300;
+    color: #c6007f;
+
+    @media (max-width:500px) {
+        font-size: 32px;
+    }
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    margin-bottom: 60px;
+}

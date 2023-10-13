@@ -40,4 +40,8 @@
 
 .btn {
     width: 100%;
+    &.active {
+        background-color: #c6007f;
+        color: #ffffff;
+    }
 }

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { setValue } from "../../redux/stepsSlice";
+import { setStep } from "../../redux/stepsSlice";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { StepType } from "../../types";
 import Button from "../Button";
@@ -17,6 +17,7 @@ import Analysis from "../Analysis";
 import Nipt from "../Nipt";
 import Psychologists from "../Psychologists";
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
+import Final from "../Final";
 
 function stepFabric(label: string, component: JSX.Element): StepType {
     return {
@@ -30,12 +31,12 @@ function stepFabric(label: string, component: JSX.Element): StepType {
 
 function Main() {
     const [steps, setSteps] = useState<StepType[]>([])
-    const step = useAppSelector(state => state.steps.value)
+    const step = useAppSelector(state => state.steps.step)
     const dispatch = useAppDispatch()
     const nodeRef = useRef(null);
 
     const start = () => {
-        dispatch(setValue(1))
+        dispatch(setStep(1))
     }
 
     useEffect(() => {
@@ -56,7 +57,7 @@ function Main() {
     return (
         <SwitchTransition>
             <CSSTransition
-                key={(step === 0).toString()}
+                key={(step === 0 || step === 10).toString()}
                 timeout={300}
                 nodeRef={nodeRef}
                 classNames="alert"
@@ -76,7 +77,9 @@ function Main() {
                             </Container>
                         </div>
                         :
-                        <Step step={steps[step]} />
+                        step === 10 ?
+                            <Final />
+                            : <Step step={steps[step]} />
                     }
                 </div>
             </CSSTransition>

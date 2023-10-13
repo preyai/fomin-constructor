@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "plop": "plop",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "deploy": "scp -r dist/* root@84.38.183.119:/var/calc"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",

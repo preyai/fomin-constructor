@@ -1,33 +1,34 @@
-import { useState } from "react";
 import { RadioType } from "../../types";
 import RadioItem from "../RadioItem";
 import styles from "./PsychologistsStyles.module.scss"
+import { setResult } from "../../redux/stepsSlice";
+import { useAppDispatch, useAppSelector } from "../../store";
+import { useEffect, useState } from "react";
+import { get } from "../../libs/api";
 
-const variants: RadioType[] = [
-    {
-        id: '1',
-        label: 'Без сопровождения',
-        price: 0
-    },
-    {
-        id: '2',
-        label: 'Стандартный пакет   |   5 консультаций',
-        price: 36000
-    },
-    {
-        id: '3',
-        label: 'Расширенный пакет   |   11 консультаций',
-        price: 55000
-    },
-]
 
 function Psychologists() {
-    const [curent, setCurent] = useState<RadioType>()
+    const [variants, setVariants] = useState<RadioType[]>([])
+
+
+    const {result, step} = useAppSelector(state => state.steps)
+    const dispatch = useAppDispatch()
+
+    const handler = (value: RadioType) => {
+        const _result = [ ...result ]
+        _result[step] = value
+        dispatch(setResult(_result))
+    }
+
+    useEffect(() => {
+        get('psychologists')
+            .then(r => setVariants(r))
+    }, [])
 
     return (
         <div className={styles.container}>
             {variants.map(v => (
-                <RadioItem value={v} active={curent?.id === v.id} handler={(() => setCurent(v))} variant="medium" />
+                <RadioItem value={v} active={result[step]?.id === v.id} handler={(() => handler(v))} variant="medium" />
             ))}
         </div>
     )

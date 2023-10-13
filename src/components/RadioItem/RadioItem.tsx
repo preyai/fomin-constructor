@@ -27,7 +27,7 @@ function RadioItem({ value, handler, active, variant }: RadioItemProps) {
                             <div className={styles.label}>{value.label}</div>
                             <div className={styles.info}>?</div>
                         </div>
-                        <div className={styles.price}>{value.price} руб</div>
+                        <div className={styles.price}>{value.price.toLocaleString()} руб</div>
                     </div> :
                     <>
                         <div className={styles.label}>{value.label}</div>
@@ -39,7 +39,7 @@ function RadioItem({ value, handler, active, variant }: RadioItemProps) {
                     variant !== 'small' &&
                     <div className={classBox}>
                         <div className={styles.description}>{value.description}</div>
-                        <div className={styles.price}>{value.price} руб</div>
+                        <div className={styles.price}>{value.price.toLocaleString()} руб</div>
                     </div>
                 }
             </div >
