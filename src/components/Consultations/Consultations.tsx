@@ -20,7 +20,7 @@ function Consultations() {
 
     useEffect(() => {
         get('consultations')
-            .then(r => setVariants(r.map((i: any) => ({ ...i, ...{ label: `${i.label} | ${i.count} консультаций`, description: `${i.price / i.count} за 1 консультацию` } }))))
+            .then(r => setVariants(r))
     }, [])
 
     return (

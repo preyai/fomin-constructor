@@ -8,7 +8,6 @@ import Button from "../Button";
 
 function Final() {
     const { result } = useAppSelector(state => state.steps)
-    const steps: number[] = Array.from({ length: 9 }, (_, i) => i + 1)
 
     return (
         <Container>
@@ -16,8 +15,8 @@ function Final() {
             <div className={styles.body}>
                 <div className={styles.h1}>Ваши бонусы:</div>
                 <div className={styles.h1}>Вы выбрали:</div>
-                {steps.map((s) => (
-                    <ResultItem step={s} value={result[s]} key={s} />
+                {result.map((result, index) => (
+                    <ResultItem step={index} value={result} key={index} />
                 ))}
                 {/* <ResultItem step={1} value={result.city?.label || ""} />
                 <ResultItem step={2} value={result.trimester?.label || ""} />

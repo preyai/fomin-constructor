@@ -1,9 +1,9 @@
 import { MouseEventHandler, PropsWithChildren } from "react";
 import styles from "./ButtonStyles.module.scss"
 
-interface ButtonProps extends PropsWithChildren {
+export interface ButtonProps extends PropsWithChildren {
     className?: string
-    type?: string | undefined
+    type?: 'gray' | undefined
     size?: "small" | "medium"
     onClick?: MouseEventHandler<HTMLButtonElement> | undefined
 }

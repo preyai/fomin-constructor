@@ -1,14 +1,14 @@
 import { Meta, StoryObj } from '@storybook/react';
-import Button, { ButtonProps } from './Button';
+import TableBox from './TableBox';
 
 const meta = {
-  title: 'Button',
-  component: Button,
+  title: 'TableBox',
+  component: TableBox,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof Button>;
+} satisfies Meta<typeof TableBox>;
 
 export default meta;
 
@@ -16,6 +16,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    children: <>Кнопка</>
-  } as ButtonProps,
+    
+  },
 };

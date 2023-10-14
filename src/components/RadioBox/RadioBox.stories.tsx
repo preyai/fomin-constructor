@@ -1,14 +1,14 @@
 import { Meta, StoryObj } from '@storybook/react';
-import Button, { ButtonProps } from './Button';
+import RadioBox from './RadioBox';
 
 const meta = {
-  title: 'Button',
-  component: Button,
+  title: 'RadioBox',
+  component: RadioBox,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof Button>;
+} satisfies Meta<typeof RadioBox>;
 
 export default meta;
 
@@ -16,6 +16,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    children: <>Кнопка</>
-  } as ButtonProps,
+    
+  },
 };

@@ -1,7 +1,8 @@
 import styles from "./ResultItemStyles.module.scss"
 import editIcon from "../../assets/edit.png"
 import { useAppDispatch } from "../../store"
-import { ResultType, setStep } from "../../redux/stepsSlice"
+import { setStep } from "../../redux/stepsSlice"
+import { ResultType } from "../../types"
 
 export type ResultItemProps = {
     step: number,
@@ -48,7 +49,7 @@ function ResultItem({ step, value }: ResultItemProps) {
 
     return (
         <div className={styles.container}>
-            <div className={styles.number}>{step}</div>
+            <div className={styles.number}>{step + 1}</div>
             <div className={styles.info}>
                 <div className={styles.label}>{labels[step]}</div>
                 <div className={styles.value}>{label}</div>

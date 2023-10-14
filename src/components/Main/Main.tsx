@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { setStep } from "../../redux/stepsSlice";
+import { setStep, setSteps } from "../../redux/stepsSlice";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { StepType } from "../../types";
 import Button from "../Button";
@@ -18,53 +18,40 @@ import Nipt from "../Nipt";
 import Psychologists from "../Psychologists";
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import Final from "../Final";
+import { get } from "../../libs/api";
 
-function stepFabric(label: string, component: JSX.Element): StepType {
-    return {
-        label,
-        type: 'SELECT',
-        variants: [],
-        description: 'Пояснялка, что тут нужно тыкать',
-        Component: component
-    }
-}
+
 
 function Main() {
-    const [steps, setSteps] = useState<StepType[]>([])
-    const step = useAppSelector(state => state.steps.step)
+    const { step, steps } = useAppSelector(state => state.steps)
     const dispatch = useAppDispatch()
     const nodeRef = useRef(null);
 
     const start = () => {
-        dispatch(setStep(1))
+        dispatch(setStep(0))
     }
 
     useEffect(() => {
-        const _steps: StepType[] = [{} as StepType]
-        _steps.push(stepFabric('Выберите город:', <Cities />))
-        _steps.push(stepFabric('Выберите триместр:', <Trimester />))
-        _steps.push(stepFabric('Выбор акушера-гинеколога:', <Doctors />))
-        _steps.push(stepFabric('Выбор частоты посещения:', <Visits />))
-        _steps.push(stepFabric('Выбор пакета УЗИ:', <Ultrasound />))
-        _steps.push(stepFabric('Выбор пакета консультаций врачей-специалистов:', <Consultations />))
-        _steps.push(stepFabric('Выбор пакета анализов:', <Analysis />))
-        _steps.push(stepFabric('Выбор НИПТ:', <Nipt />))
-        _steps.push(stepFabric('Выбор сопровождения перинатального психолога:', <Psychologists />))
-        setSteps(_steps)
+        get('steps')
+            .then(r => dispatch(setSteps(r as StepType[])))
     }, [])
+
+    useEffect(() => {
+        console.log(steps);
+    }, [steps])
 
 
     return (
         <SwitchTransition>
             <CSSTransition
-                key={(step === 0 || step === 10).toString()}
+                key={(step === undefined || step === steps.length).toString()}
                 timeout={300}
                 nodeRef={nodeRef}
                 classNames="alert"
                 unmountOnExit
             >
                 <div ref={nodeRef}>
-                    {step === 0 ?
+                    {step === undefined ?
                         <div className={styles.container}>
                             <Container>
                                 <Header />
@@ -72,14 +59,17 @@ function Main() {
                                     <h1>Конструктор
                                         программ ведения
                                         беременности</h1>
-                                    <Button onClick={start}>Запустить</Button>
+                                    {steps.length > 0 &&
+                                        <Button onClick={start}>Запустить</Button>
+                                    }
                                 </div>
                             </Container>
                         </div>
                         :
-                        step === 10 ?
+                        step < steps.length ?
+                            <Step />
+                            :
                             <Final />
-                            : <Step step={steps[step]} />
                     }
                 </div>
             </CSSTransition>

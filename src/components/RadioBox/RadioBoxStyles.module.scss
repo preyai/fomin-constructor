@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    gap: 20px;
+
+    @media (max-width:768px) {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.radioList {
+    flex: 1;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr;
+
+    @for $i from 1 through 6 {
+        &.col#{$i} {
+            grid-template-columns: repeat($i, 1fr);
+        }
+    }
+}

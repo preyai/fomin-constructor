@@ -1,0 +1,25 @@
+.container {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(3, 1fr);
+
+    &.size4 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    &.size2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    &.size1 {
+        grid-template-columns: 1fr;
+    }
+
+    @media (max-width:500px) {
+        grid-template-columns: 1fr;
+    }
+
+}

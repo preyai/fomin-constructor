@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../store'
-import { DoctorType, RadioType, VariantType } from '../types'
+import { ResultType, StepType } from '../types'
+
 
 // export type StepNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 
@@ -15,16 +16,16 @@ import { DoctorType, RadioType, VariantType } from '../types'
 //     psychologists?: RadioType
 // }
 
-export type ResultType = VariantType | RadioType | DoctorType | undefined
 // Define a type for the slice state
 interface StepsState {
-    step: number,
+    step?: number,
+    steps: StepType[],
     result: ResultType[]
 }
 
 // Define the initial state using that type
 const initialState: StepsState = {
-    step: 0,
+    steps: [],
     result: Array(10)
 }
 
@@ -33,7 +34,11 @@ export const stepsSlice = createSlice({
     initialState,
     reducers: {
         setStep: (state, action: PayloadAction<number>) => {
-            state.step = action.payload
+            if (action.payload === 0 || state.result[action.payload - 1])
+                state.step = action.payload
+        },
+        setSteps: (state, action: PayloadAction<StepType[]>) => {
+            state.steps = action.payload
         },
         setResult: (state, action: PayloadAction<ResultType[]>) => {
             state.result = action.payload
@@ -41,7 +46,7 @@ export const stepsSlice = createSlice({
     },
 })
 
-export const { setStep, setResult } = stepsSlice.actions
+export const { setStep, setSteps, setResult } = stepsSlice.actions
 
 export const selectStep = (state: RootState) => state.steps.step
 

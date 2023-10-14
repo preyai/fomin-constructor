@@ -4,27 +4,25 @@ import styles from "./PaginationStyles.module.scss"
 import arrow from "../../assets/arrow1.png"
 import { setStep } from "../../redux/stepsSlice"
 import { useMediaQuery } from "../../hooks/useMediaQuery"
-import { useEffect } from "react"
 
 
 function Pagination() {
-    const { step, result } = useAppSelector(state => state.steps)
+    const { step, steps: _steps, result } = useAppSelector(state => state.steps)
     const dispatch = useAppDispatch()
     const isPhone = useMediaQuery('(max-width: 768px)')
+    const steps = _steps.map((_v, i) => i)
+
+    if (step === undefined)
+        return
 
     const start = step > 1 ? step - 2 : step - 1
     const end = step > 1 ? step + 1 : step + 2
 
-    const steps: number[] = Array.from({ length: 9 }, (_, i) => i + 1)
 
-    useEffect(() => {
-        console.log(result.map(r => typeof r));
-
-    }, [step])
 
     return (
         <div className={styles.container}>
-            {step > 1 &&
+            {step > 0 &&
                 <Button
                     className={styles.btn}
                     type="gray"
@@ -43,7 +41,7 @@ function Pagination() {
                                 key={s}
                                 onClick={() => dispatch(setStep(s))}
                             >
-                                {s}
+                                {s + 1}
                             </div>
                         ))}
                     </> :
@@ -54,15 +52,15 @@ function Pagination() {
                                 key={s}
                                 onClick={() => dispatch(setStep(s))}
                             >
-                                {s}
+                                {s + 1}
                             </div>
                         ))}
                     </>
                 }
             </div>
-            {step < 9 &&
+            {step < steps.length - 1 &&
                 <Button
-                    className={styles.btn}
+                    className={[styles.btn, !result[step] && styles.invisible].join(" ")}
                     type="gray"
                     onClick={() => dispatch(setStep(step + 1))}
                 >
@@ -70,15 +68,16 @@ function Pagination() {
                     <img src={arrow} alt="Далее" className={styles.arrow2} />
                 </Button>
             }
-            {step === 9 &&
+            {step === steps.length - 1 &&
                 <Button
-                    className={styles.btn}
+                    className={[styles.btn, !result[step] && styles.invisible].join(" ")}
                     type="gray"
                     onClick={() => dispatch(setStep(step + 1))}
                 >
                     Завершить
                 </Button>
             }
+
         </div>
     )
 }

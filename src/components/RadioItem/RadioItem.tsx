@@ -3,43 +3,43 @@ import { RadioType } from "../../types";
 import styles from "./RadioItemStyles.module.scss"
 import { useRef, useState } from "react";
 import { CSSTransition } from "react-transition-group";
+import useStep from "../../hooks/useStep";
 
 type RadioItemProps = {
-    value: RadioType
-    handler: () => void
-    active?: boolean
-    variant?: 'large' | 'medium' | 'small'
+    variant: RadioType
+    size?: 'large' | 'medium' | 'small'
 }
 
-function RadioItem({ value, handler, active, variant }: RadioItemProps) {
+function RadioItem({ variant, size }: RadioItemProps) {
+    const { active, handler } = useStep(variant)
     const [show, setShow] = useState(false)
     const nodeRef = useRef(null);
     const classNames = `${styles.container} ${active ? styles.active : ""}`
-    const classBox = [styles.box, variant === 'large' && styles.boxLarge, variant === 'medium' && styles.boxMedium].join(" ")
+    const classBox = [styles.box, size === 'large' && styles.boxLarge, size === 'medium' && styles.boxMedium].join(" ")
 
     return (
         <>
             <div className={classNames} onClick={handler}>
                 <div className={styles.marker}></div>
-                {variant === 'small' ?
+                {size === 'small' ?
                     <div className={styles.smallBox}>
                         <div>
-                            <div className={styles.label}>{value.label}</div>
+                            <div className={styles.label}>{variant.label}</div>
                             <div className={styles.info}>?</div>
                         </div>
-                        <div className={styles.price}>{value.price.toLocaleString()} руб</div>
+                        <div className={styles.price}>{variant.price.toLocaleString()} руб</div>
                     </div> :
                     <>
-                        <div className={styles.label}>{value.label}</div>
+                        <div className={styles.label}>{variant.label}</div>
                         <div className={styles.info} onClick={() => setShow(true)}>?</div>
                     </>
                 }
 
                 {
-                    variant !== 'small' &&
+                    size !== 'small' &&
                     <div className={classBox}>
-                        <div className={styles.description}>{value.description}</div>
-                        <div className={styles.price}>{value.price.toLocaleString()} руб</div>
+                        <div className={styles.description}>{variant.description}</div>
+                        <div className={styles.price}>{variant.price.toLocaleString()} руб</div>
                     </div>
                 }
             </div >
@@ -67,11 +67,11 @@ function RadioItem({ value, handler, active, variant }: RadioItemProps) {
                             <p>1 биохимический скрининг I триместра, 3 клинических анализа крови, 3 ферритина, 2 стандартных биохимических анализа крови, 2 госпитальных комплекса, 2 коагулограммы, антитела к краснухе, группа крови, резус-фактор, ТТГ, глюкозотолерантный тест</p>
                             <h3>Анализы мочи:</h3>
                             <p>3 общих анализ мочи, 1 посев мочи на флору, экспресс-тесты на наличие белка в моче по мере необходимости</p>
+                        </div>
                     </div>
-                </div>
                 </CSSTransition >
                 , document.body)
-}
+            }
         </>
     )
 }

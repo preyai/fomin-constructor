@@ -50,6 +50,11 @@
 }
 
 .btn {
+    transition: .3s;
+    &.invisible {
+        opacity: 0;
+    }
+
     &:hover {
         img {
             filter: brightness(5);

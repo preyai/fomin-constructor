@@ -1,5 +1,6 @@
 
 export type InputType = 'SELECT' | 'CARD' | 'RADIO' | 'TABLE'
+export type DataType = 'cityes' | 'trimesters' | 'doctors' | 'visits' | 'consultations' | 'analysises' | 'nipts' | 'psychologists' | 'uzis'
 
 export type VariantType = {
     label?: string
@@ -20,10 +21,12 @@ export type RadioType = {
     price: number
 }
 
+export type ResultType = VariantType | RadioType | DoctorType | undefined
+
 export type StepType = {
     type: InputType
+    data: DataType
     variants: VariantType[]
     label: string
     description: string
-    Component: JSX.Element
 }
